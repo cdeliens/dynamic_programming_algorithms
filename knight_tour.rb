@@ -1,16 +1,17 @@
 require 'matrix'
-
+require 'pry'
 module Ed
 
   class KnightTour
-    attr_accessor :current_board, :size, :visited_moves, :initial_move
+    attr_accessor :current_board, :size, :visited_moves, :initial_move, :animation
 
-    def initialize(size, initial_move)
+    def initialize(size, initial_move, animation)
       @size = size
       @current_board = build_board_with_state(Ed::ChessBoard.new(size, nil), initial_move)
-      @current_move = visited_moves.last
+      @current_move = visited_moves.last if @visited_moves
       @initial_move = initial_move
       @initial_time = Time.now
+      @animation = animation
     end
 
     def build_board_with_state board, move
@@ -37,9 +38,11 @@ module Ed
       neighboards(move).each do |m|
         if board.state.element(m[0], m[1]) == false && (m.first >= 0 && m.first < @size && m[1] >= 0 && m[1] < @size)
           new_board = build_board_with_state board, m
-          # system("clear")
-          # puts "Execution time: #{(Time.now - @initial_time)/60*100} seconds"
-          # new_board.print 
+          if animation
+            system("clear")
+            puts "Execution time: #{(Time.now - @initial_time)/60*100} seconds"
+            new_board.print 
+          end
           backtracking new_board, m
         end
       end
@@ -111,6 +114,13 @@ class String
 
 end
 
-kt = Ed::KnightTour.new(5, [1,1])
-kt.backtracking()
+board_size = ARGV[0].to_i
+initial_position = ARGV[1].to_s.split(",").map { |s| s.to_i }
+animation = ARGV[2]
+if board_size > 4 && initial_position.count > 0
+  kt = Ed::KnightTour.new(board_size, initial_position, animation)
+  kt.backtracking()
+else
+  puts "Review your inputs"
+end
 
