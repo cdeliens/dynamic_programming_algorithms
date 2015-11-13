@@ -13,7 +13,7 @@ module Ed
       return @gapi * (i+j) if i == 0 || j == 0
       value_a = @matrix[i, j-1] + @gape
       value_b = @matrix[i-1, j] + @gapi
-      value_c = @matrix[i-1, j-1] + sub_nw(i, j)
+      value_c = @matrix[i-1, j-1] + sub_sw(i, j)
       return [value_a, value_b, value_c, 0].max
     end
 
@@ -44,6 +44,6 @@ end
 class SetableMatrix < Matrix
   public :"[]=", :set_element, :set_component
 end
-
-n = Ed::SmithWaterman.new(-2, -2, -1, 1, "ahora", "aora")
+gapi, gape, mismatch, match, word_a, word_b = ARGV[0].to_i, ARGV[1].to_i, ARGV[2].to_i, ARGV[3].to_i, ARGV[4].dup, ARGV[5].dup
+n = Ed::SmithWaterman.new(gapi, gape, mismatch, match, word_a, word_b)
 n.run

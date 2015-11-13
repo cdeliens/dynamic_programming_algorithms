@@ -45,5 +45,6 @@ class SetableMatrix < Matrix
   public :"[]=", :set_element, :set_component
 end
 
-n = Ed::NeedlemanWarsh.new(-2, -2, -1, 1, "ahora", "aora")
+gapi, gape, mismatch, match, word_a, word_b = ARGV[0].to_i, ARGV[1].to_i, ARGV[2].to_i, ARGV[3].to_i, ARGV[4].dup, ARGV[5].dup
+n = Ed::NeedlemanWarsh.new(gapi, gape, mismatch, match, word_a, word_b)
 n.run

@@ -62,6 +62,8 @@ end
 class SetableMatrix < Matrix
   public :"[]=", :set_element, :set_component
 end
-
-m = Ed::Mochila.new(18, [5,6,7,4], [85,90,150,75])
+capacity = ARGV[0].to_i
+weights = ARGV[1].to_s.split(",").map { |s| s.to_i }
+values = ARGV[1].to_s.split(",").map { |s| s.to_i }
+m = Ed::Mochila.new(capacity, weights, values)
 m.run
