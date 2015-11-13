@@ -29,5 +29,5 @@ module Ed
   end
 end
 
-play = Ed::Jenga.new ARGV[0], ARGV[1], ARGV[2] 
+play = Ed::Jenga.new ARGV[0].to_i, ARGV[1].to_i, ARGV[2].to_i 
 play.run
