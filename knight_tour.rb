@@ -1,5 +1,4 @@
 require 'matrix'
-require 'pry'
 module Ed
 
   class KnightTour
@@ -116,7 +115,7 @@ end
 
 board_size = ARGV[0].to_i
 initial_position = ARGV[1].to_s.split(",").map { |s| s.to_i }
-animation = ARGV[2]
+animation = ARGV[2] == "true" ? true : false
 if board_size > 4 && initial_position.count > 0
   kt = Ed::KnightTour.new(board_size, initial_position, animation)
   kt.backtracking()
