@@ -64,6 +64,6 @@ class SetableMatrix < Matrix
 end
 capacity = ARGV[0].to_i
 weights = ARGV[1].to_s.split(",").map { |s| s.to_i }
-values = ARGV[1].to_s.split(",").map { |s| s.to_i }
+values = ARGV[2].to_s.split(",").map { |s| s.to_i }
 m = Ed::Mochila.new(capacity, weights, values)
 m.run
